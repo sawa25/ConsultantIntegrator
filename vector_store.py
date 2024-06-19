@@ -5,6 +5,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter, MarkdownHea
 from langchain.docstore.document import Document
 from urllib.parse import urlparse
 from langchain_community.vectorstores import FAISS
+from dotenv import load_dotenv
+load_dotenv()
 
 import re
 from typing import Generator
@@ -192,7 +194,7 @@ class VStore:
             db_dict[url] = lst_keys
         return db_dict
 
-    def __split_doc__(self, text_, url_, chapter_name_):
+    def split_doc(self, text_, url_, chapter_name_):
         # Функция разбивает на чанки длины self.chunk_size text_ со странички wiki по адресу url_, 
         # возвращает список документов лангчейн:
         #   в page_content текстовые чанки, 
@@ -295,7 +297,8 @@ class VStore:
                 if response.status_code == 200:
                     bs = BeautifulSoup(response.text, "html.parser")
                     text = langchain_docs_extractor(bs)
-                    source_chunks += self.__split_doc__(text, url, get_name(url))
+                    ch_name = get_name(url)
+                    source_chunks += self.split_doc(text, url, ch_name)
 
         self.db = FAISS.from_documents(source_chunks, self.embeddings)
         self.name = chapter_name
