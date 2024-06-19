@@ -117,7 +117,7 @@ def langchain_docs_extractor(soup: BeautifulSoup) -> str:
                 else:
                     yield from get_text(child)
 
-    joined = "".join(get_text(soup))
+    joined = "\n".join(get_text(soup))
     return re.sub(r"\n\n+", "\n\n", joined).strip()
 
 class VStore:
@@ -294,8 +294,8 @@ class VStore:
                 response = requests.get(url)
                 if response.status_code == 200:
                     bs = BeautifulSoup(response.text, "html.parser")
-                    text += langchain_docs_extractor(bs)
-                    source_chunks += self.split_doc(text, url, get_name(url))
+                    text = langchain_docs_extractor(bs)
+                    source_chunks += self.__split_doc__(text, url, get_name(url))
 
         self.db = FAISS.from_documents(source_chunks, self.embeddings)
         self.name = chapter_name
