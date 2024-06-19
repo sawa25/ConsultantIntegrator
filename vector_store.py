@@ -120,7 +120,7 @@ def langchain_docs_extractor(soup: BeautifulSoup) -> str:
     joined = "".join(get_text(soup))
     return re.sub(r"\n\n+", "\n\n", joined).strip()
 
-class VStore():
+class VStore:
     # Класс векторное хранилище по определенной базе документов
     # openai_key - API_key от опенАИ - досктуп к модели эмбеддингов от OpenAI, берется из переменной окружения GPT_SECRET_KEY
     # embeddings - модель эмбеддингов
@@ -325,5 +325,4 @@ class VStore():
             print('Не удалось загрузить VS from: ', index_path)
 
         return self
-    
     
