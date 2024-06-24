@@ -1,2 +1,2 @@
-GPT_SECRET_KEY = 'sk-...'
-model_gpt = 'gpt-4o'
+GPT_SECRET_KEY = "sk-..."
+model_gpt = "gpt-4o"
