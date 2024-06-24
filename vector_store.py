@@ -31,7 +31,7 @@ def langchain_docs_extractor(soup: BeautifulSoup) -> str:
                 yield child
             elif isinstance(child, Tag):
                 if child.name in ["h1", "h2", "h3", "h4", "h5", "h6"]:
-                    yield f"{'\n\n#' * int(child.name[1:])} {child.get_text()}\n\n"
+                    yield f"\n\n{'#' * int(child.name[1:])} {child.get_text()}\n\n"
                 elif child.name == "a":
                     yield f"[{child.get_text(strip=False)}]({child.get('href')})"
                 elif child.name == "img":
