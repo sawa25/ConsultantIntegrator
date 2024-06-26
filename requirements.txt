@@ -9,3 +9,4 @@ langchain_community==0.2.4
 langchain_openai==0.1.8
 faiss-cpu==1.8.0
 beautifulsoup4
+langchain_core

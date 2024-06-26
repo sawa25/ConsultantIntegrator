@@ -195,10 +195,10 @@ class VStore:
         return db_dict
 
     def split_doc(self, text_, url_, chapter_name_):
-        # Функция разбивает на чанки длины self.chunk_size text_ со странички wiki по адресу url_, 
+        # Функция разбивает на чанки длины self.chunk_size text_ со странички по адресу url_, 
         # возвращает список документов лангчейн:
         #   в page_content текстовые чанки, 
-        #   в meta_data - заголовки маркдаун, название раздела (odata, ...), url странички
+        #   в meta_data - заголовки маркдаун, название раздела, url странички
 
         chunk_list = []
         doc_len = self.num_tokens(text_)
@@ -244,7 +244,7 @@ class VStore:
         return chunk_list
 
     def create_from_chapter_url(self, chapter_url, chunk_size=0):
-        # Функция берет стартовую страницу раздела по chapter_url (сейчас из файла list_to_parse.pkl), 
+        # Функция берет стартовую страницу раздела по chapter_url, 
         # парсит все связанные с ней (вложенные) странички
         # преобразует полученный html-код в текст, размеченный в формате markdawn, 
         # разбивает на чанки длины chunk_size,
@@ -287,7 +287,7 @@ class VStore:
 #                        if href not in list_to_parse and href.startswith('https://python.langchain.com'):
 #                            list_to_parse.append(href)            
 
-        #@title Проходим по списку ссылок и из этой странички вынимаем содержимое
+        #@title Проходим по списку ссылок и из каждой странички вынимаем содержимое
         source_chunks = []
         text = ''
         for url in list_to_parse:
