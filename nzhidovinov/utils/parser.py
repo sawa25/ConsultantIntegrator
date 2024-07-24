@@ -24,7 +24,10 @@ def docs_extractor(pagr: str) -> str:
                 elif child.name == "a":
                     yield f"[{child.get_text(strip=False)}]({child.get('href')})"
                 elif child.name == "img":
-                    yield f"![{child.get('alt', '')}]({child.get('src')})"
+                    if child.get('src').startswith('data'):
+                        yield ''    # skip images in blobs
+                    else:
+                        yield f"![{child.get('alt', '')}]({})"
                 elif child.name in ["strong", "b"]:
                     yield f"**{child.get_text(strip=False)}**"
                 elif child.name in ["em", "i"]:

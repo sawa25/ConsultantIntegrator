@@ -49,6 +49,7 @@ class UniversalLoader:
             documents.extend(docs)
             
         return documents
+
     def load_ipynb(self,ipynblinklist):
         # декодировщик страшных символов, которые попадаются в нотбуках
         # может такие символы и нормально тоже ищутся в фаис(не проверял), но смотреть в ячейках такой текст невозможно
@@ -169,7 +170,4 @@ class UniversalLoader:
         ipynbdocs=splitipynbtext(text,ipynblinklist[0])
         return ipynbdocs
 
-
-
     # load_from_X methods ...
-    
