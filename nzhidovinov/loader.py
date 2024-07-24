@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 from langchain_core.documents import Document
 
-# from langchain_community.document_loaders import RecursiveUrlLoader
+from langchain_community.document_loaders import RecursiveUrlLoader
 from utils.parser import docs_extractor
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter, MarkdownHeaderTextSplitter, CharacterTextSplitter
@@ -20,18 +20,22 @@ class UniversalLoader:
     def __init__(self, encoding='utf-8'):
         self.encoding = encoding
 
-    def load_from_urls(self, urls: list[str], recursive=False, max_depth=8, timeout=60, **kwargs) -> list[Document]:
+    def load_from_urls(self, urls: list[str], recursive=False, max_depth=8, timeout=60, header_level=3, **kwargs) -> list[Document]:
         """
         Parses provided URLs and return documents.
 
+        :param header_level:
         :param urls: URLS to parse.
         :param recursive: Parse recursive starting from URLs.
         :param max_depth: Maximum depth of recursion.
         :param timeout: Page loading timeout.
-        :param kwargs:
+        :param kwargs: Minimal header level to split on.
         :return: List of documents.
         """
-        
+
+        splitter = MarkdownHeaderTextSplitter(
+            headers_to_split_on=[('#' * i, f'h{i}') for i in range(1, header_level + 1)])
+
         documents = []
         for url in urls:
             loader = RecursiveUrlLoader(
@@ -45,9 +49,20 @@ class UniversalLoader:
                 encoding=self.encoding
             )
             docs = loader.load()
+
             # (Optional splits, checks goes here)
-            documents.extend(docs)
-            
+            doc_parts = []
+            for doc in docs:
+                splits = splitter.split_text(doc.page_content)
+                for sp in splits:
+                    if sp.metadata:
+                        doc_parts.append(
+                            Document(
+                                page_content=sp.page_content,
+                                metadata=doc.metadata | sp.metadata
+                            )
+                        )
+            documents.extend(doc_parts)
         return documents
 
     def load_ipynb(self,ipynblinklist):
