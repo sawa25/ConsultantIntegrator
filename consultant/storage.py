@@ -8,10 +8,14 @@ from langchain.indexes import SQLRecordManager, index
 
 from faiss import IndexFlatL2
 from langchain_community.docstore.in_memory import InMemoryDocstore
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 def create_engine(store_engine, embeddings, dimensions, **kwargs):
-    if store_engine == 'FAISS':
+    if store_engine.__name__ == 'FAISS':
         # See https://github.com/langchain-ai/langchain/discussions/13773+
         return FAISS(
             embedding_function=embeddings,
@@ -40,14 +44,14 @@ class VectorStore:
         self.save_path = Path(base_path) / self.name
         self.save_path.mkdir(exist_ok=True, parents=True)
 
-        self.store_engine = 'FAISS'
+        self.store_engine = FAISS
         self.embeddings = embedding
         self.dimensions = dimensions
         self.vector_store = create_engine(self.store_engine, self.embeddings, self.dimensions)
 
         self.source_id_key = source_id_key
         self.record_manager = SQLRecordManager(
-            namespace=f"{self.store_engine}/{self.name}",
+            namespace=f"{self.store_engine.__name__}/{self.name}",
             db_url=f"sqlite:///{str(self.save_path / 'cache.sql')}"
         )
         self.record_manager.create_schema()
@@ -64,6 +68,10 @@ class VectorStore:
 
     def update_documents(self, documents: list[Document] = [], delete=False, **kwargs):
         return self._index(documents, cleanup='full' if delete else 'incremental')
+
+    def merge_from(self, other):
+        self.vector_store.merge_from(other.vector_store)
+        self.record_manager.update(other.record_manager.list_keys())
 
     def clear(self):
         """Hacky helper method to clear content. """

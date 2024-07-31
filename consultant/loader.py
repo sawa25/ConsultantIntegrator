@@ -2,7 +2,7 @@ from urllib.parse import urlparse
 from langchain_core.documents import Document
 
 from langchain_community.document_loaders import RecursiveUrlLoader
-from utils.parser import docs_extractor
+from consultant.utils.parser import docs_extractor
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter, MarkdownHeaderTextSplitter, CharacterTextSplitter
 from langchain.vectorstores import FAISS
