@@ -27,22 +27,18 @@ def create_engine(store_engine, embeddings, dimensions, **kwargs):
         raise NotImplementedError('Not implemented yet')
 
 
-class VectorStore:
+class VectorStore2:
     """VectorStore class is wrapper for vector storages which supports indexing.'"""
     def __init__(
             self,
             embedding=OpenAIEmbeddings(),
             name=None,
-            base_path='vector_stores',
             description='',
             dimensions=1536,
             source_id_key="source"
     ):
         self.name = name if name else str(uuid4())
         self.description = description
-
-        self.save_path = Path(base_path) / self.name
-        self.save_path.mkdir(exist_ok=True, parents=True)
 
         self.store_engine = FAISS
         self.embeddings = embedding
@@ -52,7 +48,7 @@ class VectorStore:
         self.source_id_key = source_id_key
         self.record_manager = SQLRecordManager(
             namespace=f"{self.store_engine.__name__}/{self.name}",
-            db_url=f"sqlite:///{str(self.save_path / 'cache.sql')}"
+            db_url='sqlite:///:memory:'
         )
         self.record_manager.create_schema()
 
@@ -74,26 +70,43 @@ class VectorStore:
         self.record_manager.update(other.record_manager.list_keys())
 
     def clear(self):
-        """Hacky helper method to clear content. """
+        """Hacky helper method to clear content."""
         if self.vector_store is not None:
             self._index(cleanup='full')
 
     def search(self, query: str, **kwargs):
         return self.vector_store.search(query, **kwargs)
 
-    def save(self):
-        self.vector_store.save_local(self.save_path)
-        with Path(self.save_path / 'description.md').open('w') as f:
+    def save(self, save_path: Path):
+        save_path.mkdir(exist_ok=False, parents=True)
+
+        self.vector_store.save_local(save_path)
+        with Path(save_path / 'description.md').open('w') as f:
             f.write(self.description)
 
-    def load(self):
+        # create new manager and copy records
+        record_manager = SQLRecordManager(
+            namespace=self.record_manager.namespace,
+            db_url=f"sqlite:///{str(save_path / 'cache.sql')}"
+        )
+        record_manager.create_schema()
+        record_manager.update(self.record_manager.list_keys())
+        self.record_manager = record_manager
+
+    def load(self, save_path: Path):
+        self.name = save_path.stem
         self.vector_store = self.store_engine.load_local(
-            self.save_path,
+            save_path,
             self.embeddings,
             allow_dangerous_deserialization=True
         )
-        with Path(self.save_path / 'description.md').open() as f:
+        with Path(save_path / 'description.md').open() as f:
             self.description = f.read()
+            
+        self.record_manager = SQLRecordManager(
+            namespace=f"{self.store_engine.__name__}/{self.name}",
+            db_url=f"sqlite:///{str(save_path / 'cache.sql')}"
+        )
 
     def _index(self, documents: list[Document] = [], cleanup=None) -> dict:
         return index(
@@ -103,6 +116,7 @@ class VectorStore:
             cleanup=cleanup if cleanup else self.cleanup,
             source_id_key=self.source_id_key
         )
+
 
 
 if __name__ == '__main__':
