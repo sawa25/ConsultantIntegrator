@@ -1,0 +1,97 @@
+Collecting langchain==0.2.3
+  Downloading langchain-0.2.3-py3-none-any.whl.metadata (6.9 kB)
+Collecting langchain_community==0.2.4
+  Downloading langchain_community-0.2.4-py3-none-any.whl.metadata (2.4 kB)
+Collecting langchain_openai==0.1.8
+  Downloading langchain_openai-0.1.8-py3-none-any.whl.metadata (2.5 kB)
+Collecting faiss-cpu==1.8.0
+  Downloading faiss_cpu-1.8.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.6 kB)
+Collecting langchain_core
+  Downloading langchain_core-0.3.8-py3-none-any.whl.metadata (6.3 kB)
+Requirement already satisfied: PyYAML>=5.3 in /usr/local/lib/python3.10/dist-packages (from langchain==0.2.3) (6.0.2)
+Requirement already satisfied: SQLAlchemy<3,>=1.4 in /usr/local/lib/python3.10/dist-packages (from langchain==0.2.3) (2.0.35)
+Requirement already satisfied: aiohttp<4.0.0,>=3.8.3 in /usr/local/lib/python3.10/dist-packages (from langchain==0.2.3) (3.10.8)
+Requirement already satisfied: async-timeout<5.0.0,>=4.0.0 in /usr/local/lib/python3.10/dist-packages (from langchain==0.2.3) (4.0.3)
+  Downloading langchain_core-0.2.41-py3-none-any.whl.metadata (6.2 kB)
+Collecting langchain-text-splitters<0.3.0,>=0.2.0 (from langchain==0.2.3)
+  Downloading langchain_text_splitters-0.2.4-py3-none-any.whl.metadata (2.3 kB)
+Collecting langsmith<0.2.0,>=0.1.17 (from langchain==0.2.3)
+  Downloading langsmith-0.1.130-py3-none-any.whl.metadata (13 kB)
+Requirement already satisfied: numpy<2,>=1 in /usr/local/lib/python3.10/dist-packages (from langchain==0.2.3) (1.26.4)
+Requirement already satisfied: pydantic<3,>=1 in /usr/local/lib/python3.10/dist-packages (from langchain==0.2.3) (2.7.3)
+Requirement already satisfied: requests<3,>=2 in /usr/local/lib/python3.10/dist-packages (from langchain==0.2.3) (2.32.3)
+Collecting tenacity<9.0.0,>=8.1.0 (from langchain==0.2.3)
+  Downloading tenacity-8.5.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting dataclasses-json<0.7,>=0.5.7 (from langchain_community==0.2.4)
+  Downloading dataclasses_json-0.6.7-py3-none-any.whl.metadata (25 kB)
+Requirement already satisfied: openai<2.0.0,>=1.26.0 in /usr/local/lib/python3.10/dist-packages (from langchain_openai==0.1.8) (1.33.0)
+Requirement already satisfied: tiktoken<1,>=0.7 in /usr/local/lib/python3.10/dist-packages (from langchain_openai==0.1.8) (0.7.0)
+Collecting jsonpatch<2.0,>=1.33 (from langchain_core)
+  Downloading jsonpatch-1.33-py2.py3-none-any.whl.metadata (3.0 kB)
+Requirement already satisfied: packaging<25,>=23.2 in /usr/local/lib/python3.10/dist-packages (from langchain_core) (24.1)
+Requirement already satisfied: typing-extensions>=4.7 in /usr/local/lib/python3.10/dist-packages (from langchain_core) (4.12.2)
+Requirement already satisfied: aiohappyeyeballs>=2.3.0 in /usr/local/lib/python3.10/dist-packages (from aiohttp<4.0.0,>=3.8.3->langchain==0.2.3) (2.4.2)
+Requirement already satisfied: aiosignal>=1.1.2 in /usr/local/lib/python3.10/dist-packages (from aiohttp<4.0.0,>=3.8.3->langchain==0.2.3) (1.3.1)
+Requirement already satisfied: attrs>=17.3.0 in /usr/local/lib/python3.10/dist-packages (from aiohttp<4.0.0,>=3.8.3->langchain==0.2.3) (24.2.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /usr/local/lib/python3.10/dist-packages (from aiohttp<4.0.0,>=3.8.3->langchain==0.2.3) (1.4.1)
+Requirement already satisfied: multidict<7.0,>=4.5 in /usr/local/lib/python3.10/dist-packages (from aiohttp<4.0.0,>=3.8.3->langchain==0.2.3) (6.1.0)
+Requirement already satisfied: yarl<2.0,>=1.12.0 in /usr/local/lib/python3.10/dist-packages (from aiohttp<4.0.0,>=3.8.3->langchain==0.2.3) (1.13.1)
+Collecting marshmallow<4.0.0,>=3.18.0 (from dataclasses-json<0.7,>=0.5.7->langchain_community==0.2.4)
+  Downloading marshmallow-3.22.0-py3-none-any.whl.metadata (7.2 kB)
+Collecting typing-inspect<1,>=0.4.0 (from dataclasses-json<0.7,>=0.5.7->langchain_community==0.2.4)
+  Downloading typing_inspect-0.9.0-py3-none-any.whl.metadata (1.5 kB)
+Collecting jsonpointer>=1.9 (from jsonpatch<2.0,>=1.33->langchain_core)
+  Downloading jsonpointer-3.0.0-py2.py3-none-any.whl.metadata (2.3 kB)
+Requirement already satisfied: httpx<1,>=0.23.0 in /usr/local/lib/python3.10/dist-packages (from langsmith<0.2.0,>=0.1.17->langchain==0.2.3) (0.27.2)
+Collecting orjson<4.0.0,>=3.9.14 (from langsmith<0.2.0,>=0.1.17->langchain==0.2.3)
+  Downloading orjson-3.10.7-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (50 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.4/50.4 kB 3.5 MB/s eta 0:00:00
+Collecting requests-toolbelt<2.0.0,>=1.0.0 (from langsmith<0.2.0,>=0.1.17->langchain==0.2.3)
+  Downloading requests_toolbelt-1.0.0-py2.py3-none-any.whl.metadata (14 kB)
+Requirement already satisfied: anyio<5,>=3.5.0 in /usr/local/lib/python3.10/dist-packages (from openai<2.0.0,>=1.26.0->langchain_openai==0.1.8) (3.7.1)
+Requirement already satisfied: distro<2,>=1.7.0 in /usr/lib/python3/dist-packages (from openai<2.0.0,>=1.26.0->langchain_openai==0.1.8) (1.7.0)
+Requirement already satisfied: sniffio in /usr/local/lib/python3.10/dist-packages (from openai<2.0.0,>=1.26.0->langchain_openai==0.1.8) (1.3.1)
+Requirement already satisfied: tqdm>4 in /usr/local/lib/python3.10/dist-packages (from openai<2.0.0,>=1.26.0->langchain_openai==0.1.8) (4.66.5)
+Requirement already satisfied: annotated-types>=0.4.0 in /usr/local/lib/python3.10/dist-packages (from pydantic<3,>=1->langchain==0.2.3) (0.7.0)
+Requirement already satisfied: pydantic-core==2.18.4 in /usr/local/lib/python3.10/dist-packages (from pydantic<3,>=1->langchain==0.2.3) (2.18.4)
+Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2->langchain==0.2.3) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2->langchain==0.2.3) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2->langchain==0.2.3) (2.2.3)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2->langchain==0.2.3) (2024.8.30)
+Requirement already satisfied: greenlet!=0.4.17 in /usr/local/lib/python3.10/dist-packages (from SQLAlchemy<3,>=1.4->langchain==0.2.3) (3.1.1)
+Requirement already satisfied: regex>=2022.1.18 in /usr/local/lib/python3.10/dist-packages (from tiktoken<1,>=0.7->langchain_openai==0.1.8) (2024.9.11)
+Requirement already satisfied: exceptiongroup in /usr/local/lib/python3.10/dist-packages (from anyio<5,>=3.5.0->openai<2.0.0,>=1.26.0->langchain_openai==0.1.8) (1.2.2)
+Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.10/dist-packages (from httpx<1,>=0.23.0->langsmith<0.2.0,>=0.1.17->langchain==0.2.3) (1.0.6)
+Requirement already satisfied: h11<0.15,>=0.13 in /usr/local/lib/python3.10/dist-packages (from httpcore==1.*->httpx<1,>=0.23.0->langsmith<0.2.0,>=0.1.17->langchain==0.2.3) (0.14.0)
+Collecting mypy-extensions>=0.3.0 (from typing-inspect<1,>=0.4.0->dataclasses-json<0.7,>=0.5.7->langchain_community==0.2.4)
+  Downloading mypy_extensions-1.0.0-py3-none-any.whl.metadata (1.1 kB)
+Downloading langchain-0.2.3-py3-none-any.whl (974 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 974.0/974.0 kB 18.5 MB/s eta 0:00:00
+Downloading langchain_community-0.2.4-py3-none-any.whl (2.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 52.3 MB/s eta 0:00:00
+Downloading langchain_openai-0.1.8-py3-none-any.whl (38 kB)
+Downloading faiss_cpu-1.8.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (27.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 27.0/27.0 MB 45.5 MB/s eta 0:00:00
+Downloading langchain_core-0.2.41-py3-none-any.whl (397 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 397.0/397.0 kB 21.1 MB/s eta 0:00:00
+Downloading dataclasses_json-0.6.7-py3-none-any.whl (28 kB)
+Downloading jsonpatch-1.33-py2.py3-none-any.whl (12 kB)
+Downloading langchain_text_splitters-0.2.4-py3-none-any.whl (25 kB)
+Downloading langsmith-0.1.130-py3-none-any.whl (294 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 294.6/294.6 kB 17.2 MB/s eta 0:00:00
+Downloading tenacity-8.5.0-py3-none-any.whl (28 kB)
+Downloading jsonpointer-3.0.0-py2.py3-none-any.whl (7.6 kB)
+Downloading marshmallow-3.22.0-py3-none-any.whl (49 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.3/49.3 kB 2.6 MB/s eta 0:00:00
+Downloading orjson-3.10.7-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (141 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 141.9/141.9 kB 10.4 MB/s eta 0:00:00
+Downloading requests_toolbelt-1.0.0-py2.py3-none-any.whl (54 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 54.5/54.5 kB 4.4 MB/s eta 0:00:00
+Downloading typing_inspect-0.9.0-py3-none-any.whl (8.8 kB)
+Downloading mypy_extensions-1.0.0-py3-none-any.whl (4.7 kB)
+Installing collected packages: tenacity, orjson, mypy-extensions, marshmallow, jsonpointer, faiss-cpu, typing-inspect, requests-toolbelt, jsonpatch, langsmith, dataclasses-json, langchain_core, langchain-text-splitters, langchain_openai, langchain, langchain_community
+  Attempting uninstall: tenacity
+    Found existing installation: tenacity 9.0.0
+    Uninstalling tenacity-9.0.0:
+      Successfully uninstalled tenacity-9.0.0
+Successfully installed dataclasses-json-0.6.7 faiss-cpu-1.8.0 jsonpatch-1.33 jsonpointer-3.0.0 langchain-0.2.3 langchain-text-splitters-0.2.4 langchain_community-0.2.4 langchain_core-0.2.41 langchain_openai-0.1.8 langsmith-0.1.130 marshmallow-3.22.0 mypy-extensions-1.0.0 orjson-3.10.7 requests-toolbelt-1.0.0 tenacity-8.5.0 typing-inspect-0.9.0
