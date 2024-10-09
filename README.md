@@ -10,3 +10,4 @@ https://colab.research.google.com/drive/12LsK_UTulCm7BGzuaFtre_GUCYO_kjCO?usp=sh
 - https://drive.google.com/drive/folders/1-4Bpk2RnGNg1F5h5jBCd3u69KKb66CUG?usp=sharing - ссылка на гугл папку со скачанными файлами из  https://api.python.langchain.com/en/latest
 - https://drive.google.com/drive/folders/1HSztininM0QhU0g-aEfIcR_24ofyOcH6?usp=sharing - ссылка на гугл папку со скачанными файлами примерами из  https://github.com/pinecone-io/examples/tree/master/learn/generation/langchain/handbook
 
+# Финал https://colab.research.google.com/drive/1jPYGi-_g_OCpA_Vx1X7QmMv1QBFvP4a-?usp=sharing 
