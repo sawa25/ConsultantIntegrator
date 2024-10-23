@@ -27,6 +27,7 @@ def create_engine(store_engine, embeddings, dimensions, **kwargs):
         raise NotImplementedError('Not implemented yet')
 
 
+
 class VectorStore:
     """VectorStore class is wrapper for vector storages which supports indexing.'"""
     def __init__(
@@ -64,10 +65,19 @@ class VectorStore:
         return self._index(documents, cleanup='full' if delete else 'incremental')
 
     def merge_from(self, other):
-        #self.vector_store.merge_from(other.vector_store)
-        #self.record_manager.update(other.record_manager.list_keys())
-        documents = list(other.vector_store.docstore._dict.values())
-        self.add_documents(documents)
+        # deduplicate record_managers records
+        self_keys = self.record_manager.list_keys()
+        other_keys = other.record_manager.list_keys()
+        add_keys = set(other_keys) - set(self_keys)
+        self.record_manager.update(list(add_keys))
+
+        # remove existing docs from other.vector_store
+        self_doc_ids = self.vector_store.docstore._dict.keys()
+        other_doc_ids = other.vector_store.docstore._dict.keys()
+        shared_docs = set(self_doc_ids) & set(other_doc_ids)
+        if shared_docs:
+            other.vector_store.delete(list(shared_docs))
+        self.vector_store.merge_from(other.vector_store)
 
     def clear(self):
         """Hacky helper method to clear content."""
@@ -94,7 +104,7 @@ class VectorStore:
             record_manager.create_schema()
             record_manager.update(self.record_manager.list_keys())
             self.record_manager = record_manager
-        
+
         self.location = save_path
 
     def load(self, save_path: str | Path):
@@ -106,7 +116,7 @@ class VectorStore:
         )
         with Path(save_path / 'description.md').open() as f:
             self.description = f.read()
-            
+
         self.record_manager = SQLRecordManager(
             namespace=self.store_engine.__name__,
             db_url=f"sqlite:///{str(save_path / 'cache.sql')}"
